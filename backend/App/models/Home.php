@@ -66,6 +66,15 @@ sql;
       return $mysqli->insert($query);
     }
 
+    public static function insertImpresionConstanciaUser($user_id,$tipo_constancia,$id_producto,$horas){
+      $mysqli = Database::getInstance(true);
+      $query=<<<sql
+      INSERT INTO  impresion_constancia_user (user_id, tipo_constancia, id_producto,horas,fecha_descarga) VALUES('$user_id', '$tipo_constancia','$id_producto',$horas,NOW())
+sql;
+
+      return $mysqli->insert($query);
+    }
+
     public static function getQRById($id){
       $mysqli = Database::getInstance(true);
       $query=<<<sql

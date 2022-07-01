@@ -624,6 +624,8 @@ html;
         // $this->generaterQr($clave_ticket);
         // echo $clave;
 
+        $no_horas = base64_decode($no_horas);
+
         $productos = HomeDao::getProductosById($id_producto);
         $progresos_productos = HomeDao::getProgresosById($id_producto,$clave);
         $progresos_productos_congreso = HomeDao::getProgresosCongresoById($id_producto,$clave);
@@ -694,7 +696,7 @@ html;
 
         // echo $nombre_completo;
         // exit;
-        $insert_impresion_constancia = HomeDao::insertImpresionConstancia($datos_user['user_id'],'Digital',$id_producto);
+        $insert_impresion_constancia = HomeDao::insertImpresionConstanciaUser($datos_user['user_id'],'Digital',$id_producto,$no_horas);
         
 
         $pdf = new \FPDF($orientation = 'L', $unit = 'mm', $format = 'A4');
@@ -761,7 +763,7 @@ html;
             //TIEMPO
             $pdf->SetFont('Arial', 'B',10);
             $pdf->SetXY(156, 170.5);
-            $pdf->Multicell(10, 10, utf8_decode('5'), 0, 'C');
+            $pdf->Multicell(10, 10, utf8_decode($no_horas), 0, 'C');
             //FECHA
             $pdf->SetFont('Arial', '',10);
             $pdf->SetXY(13, 175);

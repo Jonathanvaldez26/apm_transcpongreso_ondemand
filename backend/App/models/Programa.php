@@ -201,7 +201,7 @@ sql;
     $mysqli = Database::getInstance(true);
     $query =<<<sql
     SELECT * FROM progresos_programa
-    WHERE id_programa = $num_curso AND id_registrado = $id
+    WHERE id_programa = $num_curso AND user_id = $id
 sql;
 
     return $mysqli->queryOne($query);
@@ -210,7 +210,7 @@ sql;
   public static function insertProgreso($registrado,$curso){
       $mysqli = Database::getInstance(1);
       $query=<<<sql
-      INSERT INTO progresos_programa (id_programa, id_registrado, segundos,fecha_ultima_vista) 
+      INSERT INTO progresos_programa (id_programa, user_id, segundos,fecha_ultima_vista) 
       VALUES ('$curso','$registrado','0', NOW())
 sql;
 
@@ -236,7 +236,7 @@ sql;
         UPDATE progresos_programa 
         SET segundos = '$segundos', fecha_ultima_vista = NOW()
         WHERE id_programa = '$id_programa' 
-        AND id_registrado = '$registrado'
+        AND user_id = '$registrado'
 sql;
     return $mysqli->update($query);
   } 
